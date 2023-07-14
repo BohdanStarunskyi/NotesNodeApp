@@ -1,5 +1,6 @@
 const client = require('./mongo_manager');
 const { ObjectId } = require('mongodb');
+const Constants = require('../constants/app_constants');
 
 class NotesDatabase {
     constructor() {
@@ -10,8 +11,8 @@ class NotesDatabase {
   
     async connect() {
       await this.client.connect();
-      this.db = this.client.db('NotesDatabase');
-      this.collection = this.db.collection('Notes');
+      this.db = this.client.db(Constants.NOTES_DB);
+      this.collection = this.db.collection(Constants.NOTES_COLLECTION);
     }
   
     async saveNote(title, body, ownerId) {

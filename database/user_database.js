@@ -1,4 +1,5 @@
 const client = require('./mongo_manager');
+const Constants = require('../constants/app_constants');
 
 class UserDatabase {
   constructor() {
@@ -9,8 +10,8 @@ class UserDatabase {
 
   async connect() {
     await this.client.connect();
-    this.db = this.client.db('NotesDatabase');
-    this.collection = this.db.collection('Users');
+    this.db = this.client.db(Constants.AUTH_DB);
+    this.collection = this.db.collection(Constants.AUTH_COLLECTION);
   }
 
   async saveUser(email, password) {
