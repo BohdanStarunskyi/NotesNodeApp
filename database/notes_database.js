@@ -1,4 +1,5 @@
 const client = require('./mongo_manager');
+const { ObjectId } = require('mongodb');
 
 class NotesDatabase {
     constructor() {
@@ -24,7 +25,33 @@ class NotesDatabase {
     }
 
     async getAllNotes(ownerId) {
-        return await this.collection.find({ ownerId: ownerId }).toArray();
+      const notes = await this.collection.find().toArray();
+      return notes.map(({ _id, title, body }) => ({ id: _id, title, body }));
+    }
+
+    async deleteNote(ownerId, noteId) {
+      const query = {
+        _id: new ObjectId(noteId),
+        ownerId: ownerId
+      };
+      const result = await this.collection.deleteOne(query);
+      return await result
+    }
+
+    async updateNote(title, body, ownerId, noteId){
+      const query = {
+        _id: new ObjectId(noteId),
+        ownerId: ownerId
+      };
+    
+      const update = {
+        $set: {
+          title: title,
+          body: body
+        }
+      };
+    
+      return await this.collection.updateOne(query, update);
     }
   
     async close() {

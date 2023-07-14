@@ -17,14 +17,26 @@ app.post('/login', (req, res) => {
   login(email, password, res);
 });
 
-app.post('/new-note', (req, res) => {
-  const {ownerId, title, body} = req.body
-  NotesModule.saveNote(title, body, ownerId, res)
+app.post('/note', (req, res) => {
+  const {ownerId, title, body} = req.body;
+  NotesModule.saveNote(title, body, ownerId, res);
 });
 
-app.get('/notes', async (req, res) => {
+app.get('/notes', (req, res) => {
   const ownerId = req.query.ownerId;
-  NotesModule.getAllNotesForUser(ownerId, res)
+  NotesModule.getAllNotesForUser(ownerId, res);
+});
+
+app.delete('/note', (req, res) => {
+  const noteId = req.query.noteId;
+  const ownerId = req.headers.ownerid;
+  console.log(req.headers);
+  NotesModule.deleteNote(noteId, ownerId, res);
+});
+
+app.put('/note', (req, res) => {
+  const {noteId, ownerId, title, body} = req.body;
+  NotesModule.updateNote(title, body, ownerId, noteId, res)
 });
 
 app.listen(3001, () => {

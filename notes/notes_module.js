@@ -31,6 +31,36 @@ class NotesModule {
       res.status(500).json({ result: 'Error' });
     }
   }
+
+  async deleteNote(noteId, ownerId, res) {
+    try {
+      await NotesDatabase.connect();
+      const result = await NotesDatabase.deleteNote(ownerId, noteId);
+      res.json({
+        result: 'Success',
+        deletedCount: result['deletedCount'],
+      });
+      return result;
+    } catch (error) {
+      console.error('Error deleting note:', error);
+      res.status(500).json({ result: 'Error' });
+    }
+  }
+
+  async updateNote(title, body, ownerId, noteId, res){
+    try {
+      await NotesDatabase.connect();
+      const result = await NotesDatabase.updateNote(title, body, ownerId, noteId);
+      res.json({
+        result: 'Success',
+        updated: result.modifiedCount
+      });
+      return result;
+    } catch (error) {
+      console.error('Error deleting note:', error);
+      res.status(500).json({ result: 'Error' });
+    }
+  }
 }
 
 module.exports = new NotesModule();
