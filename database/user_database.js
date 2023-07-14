@@ -20,7 +20,7 @@ class UserDatabase {
       password,
     };
     const result = await this.collection.insertOne(newUser);
-    return result.insertedId;
+    return result;
   }
 
   async getUser(email) {
