@@ -7,7 +7,8 @@
 Congrats! You're all set
 # Api documentation
 Using localhost
-
+<br>
+<br>
 > POST `http://localhost:3001/login`
 
 body:
@@ -18,6 +19,9 @@ body:
 }
 ```
 
+Login or creare account
+<br>
+<br>
 > POST `http://localhost:3001/note`
 
 body:
@@ -29,6 +33,9 @@ body:
 }
 ```
 
+Create a note
+<br>
+<br>
 > GET `http://localhost:3001/notes`
 
 query:
@@ -36,6 +43,9 @@ query:
 ownerId: string
 ```
 
+Get list of notes
+<br>
+<br>
 > DELETE `http://localhost:3001/note`
 
 query:
@@ -47,6 +57,9 @@ header:
 ownerId: string
 ```
 
+Delete a note
+<br>
+<br>
 > PUT `http://localhost:3001/note`
 
 body:
@@ -58,3 +71,5 @@ body:
     "noteId": string
 }
 ```
+
+Update a note
