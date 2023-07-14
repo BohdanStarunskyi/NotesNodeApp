@@ -43,6 +43,20 @@ query:
 ownerId: string
 ```
 
+response:
+```
+{
+    "result": string,
+    "notes": [
+        {
+            "id": string,
+            "title": string,
+            "body": string
+        }
+    ]
+}
+```
+
 Get list of notes
 <br>
 <br>
