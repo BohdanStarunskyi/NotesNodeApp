@@ -1,12 +1,12 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const Constants = require('../constants/app_constants');
+require('dotenv').config();
 
-const client = new MongoClient(Constants.MONGO_KEY, {
+const client = new MongoClient(process.env.MONGO_KEY, {
     serverApi: {
       version: ServerApiVersion.v1,
       strict: true,
       deprecationErrors: true,
     },
   });
-
+client.connect()
 module.exports = client;

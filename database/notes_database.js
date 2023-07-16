@@ -10,7 +10,6 @@ class NotesDatabase {
     }
   
     async connect() {
-      await this.client.connect();
       this.db = this.client.db(Constants.NOTES_DB);
       this.collection = this.db.collection(Constants.NOTES_COLLECTION);
     }
