@@ -1,7 +1,8 @@
 # NotesNodeApp
 # How to run my project?
 1) in terminal use npm install
-2) in terminal use node app.js
+2) create .ext file with MONGO_KEY variable
+3) in terminal use node app.js
    
 Congrats! You're all set
 # Api documentation

@@ -1,13 +1,13 @@
 const UserDatabase = require('../database/user_database');
 
-async function login(email, password, res) {
+async function login(model, res) {
     try {
       await UserDatabase.connect()
       // Find the user with the given email
-      const user = await UserDatabase.getUser(email)
+      const user = await UserDatabase.getUser(model.email)
   
       if (!user) {
-        result = await UserDatabase.saveUser(email, password)
+        result = await UserDatabase.saveUser(model.email, model.password)
         res.json({ 
           result: 'Registered',
           id: result.insertedId
@@ -15,7 +15,7 @@ async function login(email, password, res) {
         return;
       }
   
-      if (user.password === password) {
+      if (user.password === model.password) {
         res.json({ result: 'Logged in', id: user._id });
       } else {
         res.status(422).json({ result: 'Wrong password' });

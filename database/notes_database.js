@@ -1,6 +1,7 @@
 const client = require('./mongo_manager');
 const { ObjectId } = require('mongodb');
 const Constants = require('../constants/app_constants');
+const NoteModel = require('../models/notes_models')
 
 class NotesDatabase {
     constructor() {
@@ -25,8 +26,8 @@ class NotesDatabase {
     }
 
     async getAllNotes(ownerId) {
-      const notes = await this.collection.find(ownerId).toArray();
-      return notes.map(({ _id, title, body }) => ({ id: _id, title, body }));
+      const notes = await this.collection.find({ownerId: ownerId}).toArray();
+      return notes.map(({ _id, title, body }) => new NoteModel(ownerId, title, body, _id));
     }
 
     async deleteNote(ownerId, noteId) {

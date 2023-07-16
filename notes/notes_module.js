@@ -2,10 +2,10 @@ const { json } = require('body-parser');
 const NotesDatabase = require('../database/notes_database');
 
 class NotesModule {
-  async saveNote(title, body, ownerId, res) {
+  async saveNote(model, res) {
     try {
       await NotesDatabase.connect();
-      const result = await NotesDatabase.saveNote(title, body, ownerId);
+      const result = await NotesDatabase.saveNote(model.title, model.body, model.ownerId);
       res.json({
         result: 'Success',
         note_id: result,
@@ -25,6 +25,7 @@ class NotesModule {
         result: 'Success',
         notes: result,
       });
+      console.log(result)
       return result;
     } catch (error) {
       console.error('Error retrieving notes:', error);
@@ -32,10 +33,10 @@ class NotesModule {
     }
   }
 
-  async deleteNote(noteId, ownerId, res) {
+  async deleteNote(model, res) {
     try {
       await NotesDatabase.connect();
-      const result = await NotesDatabase.deleteNote(ownerId, noteId);
+      const result = await NotesDatabase.deleteNote(model.ownerId, model.id);
       res.json({
         result: 'Success',
         deletedCount: result['deletedCount'],
@@ -47,10 +48,10 @@ class NotesModule {
     }
   }
 
-  async updateNote(title, body, ownerId, noteId, res){
+  async updateNote(model, res){
     try {
       await NotesDatabase.connect();
-      const result = await NotesDatabase.updateNote(title, body, ownerId, noteId);
+      const result = await NotesDatabase.updateNote(model.title, model.body, model.ownerId, model.id);
       res.json({
         result: 'Success',
         updated: result.modifiedCount
