@@ -25,7 +25,7 @@ class NotesDatabase {
     }
 
     async getAllNotes(ownerId) {
-      const notes = await this.collection.find().toArray();
+      const notes = await this.collection.find(ownerId).toArray();
       return notes.map(({ _id, title, body }) => ({ id: _id, title, body }));
     }
 
