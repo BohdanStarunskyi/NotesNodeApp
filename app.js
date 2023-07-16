@@ -18,12 +18,13 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/note', (req, res) => {
-  const {ownerId, title, body} = req.body;
+  const ownerId = req.headers.ownerid
+  const {title, body} = req.body;
   NotesModule.saveNote(title, body, ownerId, res);
 });
 
 app.get('/notes', (req, res) => {
-  const ownerId = req.query.ownerId;
+  const ownerId = req.headers.ownerid
   NotesModule.getAllNotesForUser(ownerId, res);
 });
 
@@ -35,7 +36,8 @@ app.delete('/note', (req, res) => {
 });
 
 app.put('/note', (req, res) => {
-  const {noteId, ownerId, title, body} = req.body;
+  const ownerId = req.headers.ownerid
+  const {noteId, title, body} = req.body;
   NotesModule.updateNote(title, body, ownerId, noteId, res)
 });
 
