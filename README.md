@@ -1,8 +1,7 @@
 # NotesNodeApp
 # How to run my project?
-1) open constants/app_constants.js
-2) set your values
-3) in terminate use node app.js
+1) in terminal use npm install
+2) in terminal use node app.js
    
 Congrats! You're all set
 # Api documentation
