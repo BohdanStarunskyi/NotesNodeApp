@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const login = require('./login/login_module');
+const LoginModule = require('./login/login_module');
 const NotesModule = require('./notes/notes_module')
 const LoginRequestModel = require('./login/login_request')
 const NotesModel = require('./notes/note_model')
@@ -17,6 +17,7 @@ app.use(express.json());
  
 app.post('/login', (req, res) => {
   const model = new LoginRequestModel(req.body)
+  LoginModule.login(model, res)
 });
 
 app.post('/note', (req, res) => {
