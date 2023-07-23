@@ -39,12 +39,18 @@ headers:
 body:
 ```
 {
-    "ownerId": string,
     "title": string,
     "body": string
 }
 ```
 
+response:
+```
+{
+    "result": string,
+    "value": string
+}
+```
 Create a note
 <br>
 <br>
@@ -59,11 +65,12 @@ response:
 ```
 {
     "result": string,
-    "notes": [
+    "value": [
         {
-            "id": string,
+            "ownerId": string,
             "title": string,
-            "body": string
+            "body": string,
+            "id": string
         }
     ]
 }
@@ -83,15 +90,27 @@ header:
 ownerId: string
 ```
 
+response:
+```
+{
+    "result": string,
+    "value": int
+}
+```
+
 Delete a note
 <br>
 <br>
 > PUT `http://localhost:3001/note`
 
+header:
+```
+ownerId: string
+```
+
 body:
 ```
 {
-    "ownerId": string,
     "title": string,
     "body": string,
     "noteId": string
