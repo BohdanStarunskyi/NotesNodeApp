@@ -1,7 +1,7 @@
 const client = require('./mongo_manager');
 const { ObjectId } = require('mongodb');
 const Constants = require('../constants/app_constants');
-const NoteModel = require('../models/notes_models')
+const NoteModel = require('../notes/note_model')
 
 class NotesDatabase {
     constructor() {

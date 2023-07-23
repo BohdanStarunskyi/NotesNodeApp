@@ -4,8 +4,8 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const login = require('./login/login_module');
 const NotesModule = require('./notes/notes_module')
-const LoginRequeestModel = require('./models/login_models')
-const NotesModel = require('./models/notes_models')
+const LoginRequestModel = require('./login/login_request')
+const NotesModel = require('./notes/note_model')
 
 
 const app = express();
@@ -16,8 +16,7 @@ app.use(morgan('combined'));
 app.use(express.json());
  
 app.post('/login', (req, res) => {
-  const model = new LoginRequeestModel(req.body)
-  login(model, res);
+  const model = new LoginRequestModel(req.body)
 });
 
 app.post('/note', (req, res) => {
@@ -45,7 +44,7 @@ app.delete('/note', (req, res) => {
     res.status(422).json({result: "ownerId can't be null or empty"});
   else{
     const model = new NotesModel(ownerId, null, null, noteId);
-    NotesModule.decleteNote(model, res);
+    NotesModule.deleteNote(model, res);
   }
 });
 

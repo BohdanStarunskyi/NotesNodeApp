@@ -1,28 +1,32 @@
 const UserDatabase = require('../database/user_database');
+const LoginResponse = require('./login_response');
 
 async function login(model, res) {
-    try {
-      await UserDatabase.connect()
-      // Find the user with the given email
-      const user = await UserDatabase.getUser(model.email)
-  
-      if (!user) {
-        result = await UserDatabase.saveUser(model.email, model.password)
-        res.json({ 
-          result: 'Registered',
-          id: result.insertedId
-       });
+  try {
+    await UserDatabase.connect();
+    const user = await UserDatabase.getUser(model.email);
+    console.log(model)
+    if (!user) {
+      if (!model.email || !model.password) {
+        res.status(400).json(new LoginResponse(null, "error"));
         return;
       }
-  
-      if (user.password === model.password) {
-        res.json({ result: 'Logged in', id: user._id });
-      } else {
-        res.status(422).json({ result: 'Wrong password' });
-      }
-    } catch (error) {
-      console.error('Error logging in:', error);
-      res.status(500).json({ result: 'Error logging in' });
+
+      const result = await UserDatabase.saveUser(model.email, model.password);
+      console.log(result);
+      res.json(new LoginResponse(result.insertedId, "success"));
+      return;
     }
+
+    if (user.password === model.password) {
+      res.json(new LoginResponse(user._id, "success"));
+    } else {
+      res.status(422).json(new LoginResponse(null, "error"));
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(new LoginResponse(null, "error"));
   }
-  module.exports = login;
+}
+
+module.exports = login;
