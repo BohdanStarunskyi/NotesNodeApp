@@ -19,11 +19,23 @@ body:
 }
 ```
 
+response:
+```
+{
+    "result": string,
+    "id": string
+}
+```
+
 Login or creare account
 <br>
 <br>
 > POST `http://localhost:3001/note`
 
+headers:
+```
+"ownerId": string
+```
 body:
 ```
 {
