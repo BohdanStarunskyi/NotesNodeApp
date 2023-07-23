@@ -117,4 +117,12 @@ body:
 }
 ```
 
+response:
+```
+{
+    "result": string,
+    "value": int
+}
+```
+
 Update a note
