@@ -19,7 +19,6 @@ class NotesModule {
       await NotesDatabase.connect();
       const result = await NotesDatabase.getAllNotes(ownerId);
       res.json(new NoteResponse(result, "success"));
-      console.log(result)
       return result;
     } catch (error) {
       console.error('Error retrieving notes:', error);
