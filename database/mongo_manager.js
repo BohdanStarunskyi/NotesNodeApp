@@ -8,5 +8,5 @@ const client = new MongoClient(process.env.MONGO_KEY, {
       deprecationErrors: true,
     },
   });
-client.connect()
+client.connect();
 module.exports = client;

@@ -6,4 +6,4 @@ class NoteModel {
       this.id = id;
     }
 }
-module.exports = NoteModel
+module.exports = NoteModel;

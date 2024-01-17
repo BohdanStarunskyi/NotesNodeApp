@@ -4,4 +4,4 @@ class LoginRequestModel {
       this.password = body.password;
     }
 }
-module.exports = LoginRequestModel
+module.exports = LoginRequestModel;

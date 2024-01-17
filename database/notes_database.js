@@ -36,7 +36,7 @@ class NotesDatabase {
         ownerId: ownerId
       };
       const result = await this.collection.deleteOne(query);
-      return await result
+      return await result;
     }
 
     async updateNote(title, body, ownerId, noteId){
